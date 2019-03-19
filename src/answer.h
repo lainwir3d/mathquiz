@@ -13,6 +13,8 @@ public:
 
     QString formula() const { return m_formula; }
 
+    friend bool operator==(const Answer &lanswer, const Answer &ranswer);
+
 signals:
 
     void formulaChanged(QString formula);

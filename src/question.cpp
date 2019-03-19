@@ -34,7 +34,7 @@ bool Question::checkAnswer(Answer *answer)
     for(int i=0; i < m_answers.length() ; i++){
         Answer * a = m_answers.at(i);
 
-        if(a->formula() == answer->formula()){
+        if( *(a) == *(answer) ){
             ok = true;
             break;
         }
