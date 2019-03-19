@@ -17,7 +17,8 @@ SOURCES += \
     $$PWD/src/questiongroup.cpp \
     $$PWD/src/game.cpp
 
-RESOURCES += mathquiz.qrc
+RESOURCES += \
+    $$PWD/mathquiz.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
