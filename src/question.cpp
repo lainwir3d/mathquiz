@@ -12,6 +12,37 @@ Question::Question(QObject *parent) : QObject(parent)
     m_difficulty = 1;
 }
 
+void Question::appendAnswer(Answer *answer)
+{
+    if(!answer){
+        qDebug() << "Could not append answer, nullptr!";
+        return;
+    }
+
+    m_answers.append(answer);
+}
+
+bool Question::checkAnswer(Answer *answer)
+{
+    if(!answer){
+        qDebug() << "Could not check answer, nullptr!";
+        return false;
+    }
+
+    bool ok = false;
+
+    for(int i=0; i < m_answers.length() ; i++){
+        Answer * a = m_answers.at(i);
+
+        if(a->formula() == answer->formula()){
+            ok = true;
+            break;
+        }
+    }
+
+    return ok;
+}
+
 void Question::setId(QString id)
 {
     if(m_readOnly) return;

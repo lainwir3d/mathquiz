@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QDebug>
 
 #include "answer.h"
 
@@ -24,6 +25,9 @@ public:
     QString formula() const { return m_formula; }
     int timeLimit_ms() const { return m_timeLimit_ms; }
     int difficulty() const { return m_difficulty; }
+
+    void appendAnswer(Answer * answer);
+    bool checkAnswer(Answer *answer);
 
 signals:
     void idChanged(QString id);
