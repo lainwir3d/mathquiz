@@ -1,5 +1,7 @@
 CONFIG += c++11
 
+QT += network
+
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Refer to the documentation for the
@@ -15,7 +17,12 @@ SOURCES += \
     $$PWD/src/question.cpp \
     $$PWD/src/answer.cpp \
     $$PWD/src/questiongroup.cpp \
-    $$PWD/src/game.cpp
+    $$PWD/src/game.cpp \
+    $$PWD/src/connectionlistener.cpp \
+    $$PWD/src/tcpconnectionlistener.cpp \
+    $$PWD/src/player.cpp \
+    $$PWD/src/playerbackend.cpp \
+    $$PWD/src/playertcpbackend.cpp
 
 RESOURCES += \
     $$PWD/mathquiz.qrc
@@ -30,5 +37,10 @@ HEADERS += \
     $$PWD/src/question.h \
     $$PWD/src/answer.h \
     $$PWD/src/questiongroup.h \
-    $$PWD/src/game.h
+    $$PWD/src/game.h \
+    $$PWD/src/connectionlistener.h \
+    $$PWD/src/tcpconnectionlistener.h \
+    $$PWD/src/player.h \
+    $$PWD/src/playerbackend.h \
+    $$PWD/src/playertcpbackend.h
 
