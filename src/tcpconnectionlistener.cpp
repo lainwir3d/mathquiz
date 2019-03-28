@@ -4,6 +4,9 @@ TcpConnectionListener::TcpConnectionListener()
 {
     m_tcpServer = new QTcpServer();
 
+    m_port = 42000;
+    m_listen = false;
+
     connect(m_tcpServer, &QTcpServer::newConnection, this, &TcpConnectionListener::newTCPConnectionCallback);
 }
 
@@ -21,6 +24,7 @@ bool TcpConnectionListener::startListening()
 bool TcpConnectionListener::stopListening()
 {
     m_tcpServer->close();
+    return true;
 }
 
 void TcpConnectionListener::newTCPConnectionCallback()
@@ -43,3 +47,28 @@ void TcpConnectionListener::newTCPConnectionCallback()
 
     emit newConnection(p);
 }
+
+void TcpConnectionListener::setPort(int port)
+{
+    if (m_port == port)
+        return;
+
+    m_port = port;
+    emit portChanged(m_port);
+}
+
+void TcpConnectionListener::setListen(bool listen)
+{
+    if (m_listen == listen)
+        return;
+
+    if(listen){
+        if(!startListening()) return;
+    }else{
+        if(!stopListening()) return;
+    }
+
+    m_listen = listen;
+    emit listenChanged(m_listen);
+}
+
