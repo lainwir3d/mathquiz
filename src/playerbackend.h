@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include <QDebug>
+
 class PlayerBackend : public QObject
 {
     Q_OBJECT
@@ -19,11 +21,12 @@ public:
     Q_ENUM(ConnectionState)
 
     ConnectionState state() const { return m_state; }
-    bool sendMessage(QString message);
+    bool sendMessage(QString message) { return sendMessage(message.toUtf8()); }
+    virtual bool sendMessage(QByteArray message) { return false; }
 
 signals:
-
     void stateChanged(ConnectionState state);
+    void messageReceived(QByteArray message);
 
 public slots:
     void setState(ConnectionState state);
@@ -34,8 +37,6 @@ private:
 
 protected:
     ConnectionState m_state;
-
-    bool p_sendMessage(QString message) { return false; }
 };
 
 #endif // PLAYERBACKEND_H

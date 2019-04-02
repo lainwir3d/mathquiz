@@ -21,6 +21,8 @@ public:
     QString ip() const { return m_ip; }
     int port() const { return m_port; }
 
+    bool sendMessage(QByteArray message);
+
 public slots:
     void setIp(QString ip);
     void setPort(int port);
@@ -28,18 +30,16 @@ public slots:
 
 signals:
     void ipChanged(QString ip);
-
     void portChanged(int port);
 
 private slots:
     void socketStateChanged_cb(QAbstractSocket::SocketState socketState);
+    void readyRead_cb();
 
 private:
     QTcpSocket * m_socket;
     QString m_ip;
     int m_port;
-
-    bool p_sendMessage(QString message);
 };
 
 #endif // PLAYERTCPBACKEND_H

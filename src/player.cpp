@@ -1,18 +1,20 @@
 #include "player.h"
 
-Player::Player(QObject *parent) : QObject(parent)
+Player::Player(QObject *parent) : Player(nullptr, parent)
 {
+}
+
+Player::Player(PlayerBackend *backend, QObject *parent): QObject(parent)
+{
+    m_backend = backend;
 
     m_name = "Tsouin Tsouin";
     m_score = 0;
     m_alive = true;
 
-    m_backend = nullptr;
-}
-
-Player::Player(PlayerBackend *backend, QObject *parent): Player(parent)
-{
-    m_backend = backend;
+    if(m_backend){
+        //connect();
+    }
 }
 
 void Player::setName(QString name)

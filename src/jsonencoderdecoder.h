@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
@@ -19,12 +20,17 @@ class JSONEncoderDecoder : public EncoderDecoder
 public:
     explicit JSONEncoderDecoder(QObject *parent = nullptr);
 
-    QString encode(const Player * p);
-    Player decode(QString o);
+    QByteArray encode(const Player * p);
+    Player decode(QByteArray o);
 
 signals:
 
 public slots:
+
+private:
+    QJsonObject _encode(const Player * p);
+    Player _decode(QJsonObject o);
+
 };
 
 #endif // JSONENCODERDECODER_H

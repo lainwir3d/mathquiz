@@ -10,6 +10,7 @@ PlayerTCPBackend::PlayerTCPBackend(QTcpSocket * s)
 
     if(m_socket){
         connect(s, &QTcpSocket::stateChanged, this, &PlayerTCPBackend::socketStateChanged_cb);
+        connect(s, &QTcpSocket::readyRead, this, &PlayerTCPBackend::readyRead_cb);
     }
 }
 
@@ -58,7 +59,14 @@ void PlayerTCPBackend::socketStateChanged_cb(QAbstractSocket::SocketState socket
     emit stateChanged(m_state);
 }
 
-bool PlayerTCPBackend::p_sendMessage(QString message)
+void PlayerTCPBackend::readyRead_cb()
+{
+    qDebug() << __func__ << "- readyRead!!!";
+    QString message = QString::fromUtf8(m_socket->readAll());
+    qDebug() << QString("Message received: \n %1").arg(message);
+}
+
+bool PlayerTCPBackend::sendMessage(QByteArray message)
 {
     if(!m_socket){
         qDebug() << __func__ << "- Socket is nullptr";
@@ -70,6 +78,7 @@ bool PlayerTCPBackend::p_sendMessage(QString message)
         return false;
     }
 
-    m_socket->write(message.toUtf8());
+    qDebug() << __func__ << "Sending message!";
+    m_socket->write(message);
 }
 

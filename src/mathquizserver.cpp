@@ -29,6 +29,8 @@ void MathQuizServer::clearListener()
 void MathQuizServer::newPlayerConnectionCallback(Player *p)
 {
     qDebug() << QString("%1::%2").arg(metaObject()->className()).arg(__func__) << "- New connection from player";
+
+
 }
 
 void MathQuizServer::appendListener(QQmlListProperty<ConnectionListener> *list, ConnectionListener *p)

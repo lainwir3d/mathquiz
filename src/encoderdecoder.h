@@ -11,8 +11,8 @@ class EncoderDecoder : public QObject
 public:
     explicit EncoderDecoder(QObject *parent = nullptr);
 
-    virtual QString encode(const Player * p) = 0;
-    virtual Player decode(QString o) = 0;
+    virtual QByteArray encode(const Player * p) = 0;
+    virtual Player decode(QByteArray o) = 0;
 
 
 signals:

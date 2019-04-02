@@ -30,7 +30,7 @@ void MathQuizClient::backendStateChanged_cb(PlayerBackend::ConnectionState state
 {
     if(state == PlayerBackend::ConnectedState){
         qDebug() << __func__ << "- We are now connected!";
-        //m_backend->sendMessage(m_encoderdecoder->encode());
+        m_backend->sendMessage(m_encoderdecoder->encode(m_player));
     }
 }
 
