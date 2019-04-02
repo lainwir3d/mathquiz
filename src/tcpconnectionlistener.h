@@ -5,6 +5,7 @@
 #include <QTcpServer>
 
 #include "connectionlistener.h"
+#include "playertcpbackend.h"
 #include "player.h"
 
 class TcpConnectionListener : public ConnectionListener

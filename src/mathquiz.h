@@ -7,6 +7,8 @@
 #include "playertcpbackend.h"
 #include "connectionlistener.h"
 #include "tcpconnectionlistener.h"
+#include "mathquizserver.h"
+#include "mathquizclient.h"
 
 class MathQuiz : public QObject
 {

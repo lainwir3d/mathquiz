@@ -43,7 +43,7 @@ void TcpConnectionListener::newTCPConnectionCallback()
         return;
     }
 
-    Player * p = new Player();
+    Player * p = new Player(new PlayerTCPBackend(s));
 
     emit newConnection(p);
 }

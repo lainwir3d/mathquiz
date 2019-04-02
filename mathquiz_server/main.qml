@@ -10,7 +10,14 @@ ApplicationWindow {
 
     title: qsTr("MathQuiz server")
 
-    TcpConnectionListener {
-        listen: true
+    MathQuizServer {
+
+        listeners: [
+            TcpConnectionListener {
+                listen: true
+            }
+
+        ]
     }
+
 }

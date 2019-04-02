@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QQmlEngine>
 
 #include "player.h"
 
@@ -25,5 +26,7 @@ signals:
 
 public slots:
 };
+
+QML_DECLARE_TYPE(ConnectionListener *)
 
 #endif // CONNECTIONLISTENER_H
