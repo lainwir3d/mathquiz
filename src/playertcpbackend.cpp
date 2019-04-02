@@ -48,7 +48,28 @@ void PlayerTCPBackend::connectToServer()
 void PlayerTCPBackend::socketStateChanged_cb(QAbstractSocket::SocketState socketState)
 {
     if(socketState == QAbstractSocket::ConnectedState){
-        qDebug() << __func__ << "- We are now connected!";
+        m_state = PlayerBackend::ConnectedState;
+    }else if(socketState == QAbstractSocket::ConnectingState){
+        m_state = PlayerBackend::ConnectingState;
+    }else if(socketState == QAbstractSocket::UnconnectedState){
+        m_state = PlayerBackend::UnconnectedState;
     }
+
+    emit stateChanged(m_state);
+}
+
+bool PlayerTCPBackend::p_sendMessage(QString message)
+{
+    if(!m_socket){
+        qDebug() << __func__ << "- Socket is nullptr";
+        return false;
+    }
+
+    if(!m_socket->isValid()){
+        qDebug() << __func__ << "- Invalid socket";
+        return false;
+    }
+
+    m_socket->write(message.toUtf8());
 }
 

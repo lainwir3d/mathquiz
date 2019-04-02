@@ -38,6 +38,8 @@ private:
     QTcpSocket * m_socket;
     QString m_ip;
     int m_port;
+
+    bool p_sendMessage(QString message);
 };
 
 #endif // PLAYERTCPBACKEND_H

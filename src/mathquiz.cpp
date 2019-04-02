@@ -17,4 +17,6 @@ void MathQuiz::declareQML()
     qmlRegisterType<PlayerBackend>("MathQuiz", 1, 0, "PlayerBackend");
     qmlRegisterType<PlayerTCPBackend>("MathQuiz", 1, 0, "PlayerTCPBackend");
 
+    qmlRegisterType<Player>("MathQuiz", 1, 0, "Player");
+
 }

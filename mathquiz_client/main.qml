@@ -22,14 +22,50 @@ Window {
             ip: ipField.text
             port: 42000
         }
+
+        player: Player {
+            id: player
+
+            name: playerNameField.text
+        }
     }
 
-    TextField {
-        id: ipField
-
+    Column {
         anchors.centerIn: parent
+        Row {
+            spacing: 5
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
 
-        text: mainW._defaultIP
+                text: "Nom du joueur"
+            }
+
+            TextField {
+                id: playerNameField
+
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: "toto"
+            }
+        }
+
+        Row {
+            spacing: 5
+
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: "IP du serveur:"
+            }
+
+            TextField {
+                id: ipField
+
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: mainW._defaultIP
+            }
+        }
     }
 
 

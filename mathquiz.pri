@@ -25,7 +25,9 @@ SOURCES += \
     $$PWD/src/playertcpbackend.cpp \
     $$PWD/src/mathquiz.cpp \
     $$PWD/src/mathquizserver.cpp \
-    $$PWD/src/mathquizclient.cpp
+    $$PWD/src/mathquizclient.cpp \
+    $$PWD/src/jsonencoderdecoder.cpp \
+    $$PWD/src/encoderdecoder.cpp
 
 RESOURCES += \
     $$PWD/mathquiz.qrc
@@ -48,5 +50,7 @@ HEADERS += \
     $$PWD/src/playertcpbackend.h \
     $$PWD/src/mathquiz.h \
     $$PWD/src/mathquizserver.h \
-    $$PWD/src/mathquizclient.h
+    $$PWD/src/mathquizclient.h \
+    $$PWD/src/jsonencoderdecoder.h \
+    $$PWD/src/encoderdecoder.h
 
