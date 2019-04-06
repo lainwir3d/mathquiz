@@ -31,6 +31,7 @@ public slots:
 
 private:
 
+    QString _classname = "JSONEncoderDecoder";
 };
 
 #endif // JSONENCODERDECODER_H
