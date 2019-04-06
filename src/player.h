@@ -33,6 +33,8 @@ signals:
     void encoderDecoderChanged(EncoderDecoder * encoderDecoder);
     void connectionStateChanged(PlayerBackend::ConnectionState state);
 
+    void playerInformationReceived(PlayerInformation * infos);
+
 public slots:
     void setInfos(PlayerInformation * infos);
     void setBackend(PlayerBackend * backend);

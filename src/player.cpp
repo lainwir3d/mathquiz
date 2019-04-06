@@ -67,5 +67,17 @@ void Player::encodedMessageReceived(QByteArray message)
 {
     qDebug() << QString("%1::%2 - Encoded message received").arg(_className).arg(__func__);
 
+    Message * m = m_encoderDecoder->decode(message);
 
+
+    if(m){
+        if(m->type() == Message::PlayerInformationMessage){
+            emit playerInformationReceived(Message::toPlayerInformation(m));
+        }
+
+
+        m->deleteLater();
+    }else{
+        qDebug() << QString("%1::%2 - Could not decode message");
+    }
 }
