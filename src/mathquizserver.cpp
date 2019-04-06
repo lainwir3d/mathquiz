@@ -2,6 +2,7 @@
 
 MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 {
+    m_playerListModel = new PlayerListModel(this);
 }
 
 void MathQuizServer::appendListener(ConnectionListener *l)
@@ -33,7 +34,7 @@ void MathQuizServer::newPlayerConnectionCallback(Player *p)
     p->infos()->setAlive(true);
     p->infos()->setScore(0);
 
-    m_players.append(p);
+    m_playerListModel->append(p);
 
     connect(p, &Player::playerInformationReceived, [this, p](PlayerInformation * infos){ this->playerInformationReceived(p, infos); });
 }

@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QVariantList>
 #include <QQmlListProperty>
+#include <QAbstractItemModel>
 
 #include "connectionlistener.h"
 #include "tcpconnectionlistener.h"
+#include "playerlistmodel.h"
 
 #include <QDebug>
 
@@ -14,6 +16,7 @@ class MathQuizServer : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<ConnectionListener> listeners READ listeners)
+    Q_PROPERTY(QAbstractItemModel * playerModel READ playerModel NOTIFY playerModelChanged)
 public:
     explicit MathQuizServer(QObject *parent = nullptr);
 
@@ -31,7 +34,11 @@ public:
     ConnectionListener* listener(int idx);
     void clearListener();
 
+    QAbstractItemModel * playerModel() const { return m_playerListModel; }
+
 signals:
+
+    void playerModelChanged(PlayerListModel * playerModel);
 
 public slots:
 
@@ -40,7 +47,7 @@ private slots:
     void playerInformationReceived(Player * p, PlayerInformation * info);
 
 private:
-    QList<Player *> m_players;
+    PlayerListModel * m_playerListModel;
 
     /*
      * Static listener accessor

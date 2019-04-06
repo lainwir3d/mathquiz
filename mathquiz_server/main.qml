@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.12
 
 import MathQuiz 1.0
 
@@ -11,6 +11,7 @@ ApplicationWindow {
     title: qsTr("MathQuiz server")
 
     MathQuizServer {
+        id: server
 
         listeners: [
             TcpConnectionListener {
@@ -18,6 +19,17 @@ ApplicationWindow {
             }
 
         ]
+    }
+
+    ListView {
+        anchors.fill: parent
+
+        model: server.playerModel
+
+        delegate: Label {
+            text: "Player: " + playerName
+        }
+
     }
 
 }

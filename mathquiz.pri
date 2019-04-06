@@ -29,7 +29,8 @@ SOURCES += \
     $$PWD/src/encoderdecoder.cpp \
     $$PWD/src/playerinformation.cpp \
     $$PWD/src/player.cpp \
-    $$PWD/src/message.cpp
+    $$PWD/src/message.cpp \
+    $$PWD/src/playerlistmodel.cpp
 
 RESOURCES += \
     $$PWD/mathquiz.qrc
@@ -56,5 +57,6 @@ HEADERS += \
     $$PWD/src/encoderdecoder.h \
     $$PWD/src/playerinformation.h \
     $$PWD/src/player.h \
-    $$PWD/src/message.h
+    $$PWD/src/message.h \
+    $$PWD/src/playerlistmodel.h
 
