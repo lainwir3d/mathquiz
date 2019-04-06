@@ -7,5 +7,5 @@ ConnectionListener::ConnectionListener(QObject *parent) : QObject(parent)
 
 void ConnectionListener::newConnectionCallback(Player *p)
 {
-    qDebug() << __func__ << "- New connection on backend %1 from %2.";
+    //qDebug() << __func__ << "- New connection on backend %1 from %2.";
 }
