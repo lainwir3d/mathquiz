@@ -2,44 +2,41 @@
 
 MathQuizClient::MathQuizClient(QObject *parent) : QObject(parent)
 {
-    connect(this, &MathQuizClient::backendChanged, this, &MathQuizClient::backendChanged_cb);
+    m_player = nullptr;
 
-    m_backend = nullptr;
-    m_encoderdecoder = new JSONEncoderDecoder();
+    connect(this, &MathQuizClient::playerChanged, this, &MathQuizClient::playerChanged_cb);
 }
 
-
-
-void MathQuizClient::setBackend(PlayerBackend * backend)
+void MathQuizClient::setPlayer(Player * playerInfos)
 {
-    if (m_backend == backend)
+    if (m_player == playerInfos)
         return;
 
-    m_backend = backend;
-    emit backendChanged(m_backend);
+    m_player = playerInfos;
+    emit playerChanged(m_player);
 }
 
-void MathQuizClient::backendChanged_cb(PlayerBackend *backend)
+void MathQuizClient::connectionStateChanged_cb(PlayerBackend::ConnectionState state)
 {
-    disconnect(this, SLOT(backendStateChanged_cb()));
-
-    connect(backend, &PlayerBackend::stateChanged, this, &MathQuizClient::backendStateChanged_cb);
-}
-
-void MathQuizClient::backendStateChanged_cb(PlayerBackend::ConnectionState state)
-{
+    qDebug() << QString("%1::%2").arg(_classname).arg(__func__);
     if(state == PlayerBackend::ConnectedState){
-        qDebug() << __func__ << "- We are now connected!";
-        m_backend->sendMessage(m_encoderdecoder->encode(m_player));
+        Message * m = Message::newMessage(m_player->infos());
+
+        if(!m_player->sendMessage(m)){
+            qDebug() << QString("%1::%2 - Error sending player informations").arg(_classname).arg(__func__);
+        }
     }
 }
 
-void MathQuizClient::setPlayer(Player * player)
+void MathQuizClient::playerChanged_cb(Player *p)
 {
-    if (m_player == player)
-        return;
+    qDebug() << QString("%1::%2").arg(_classname).arg(__func__);
 
-    m_player = player;
-    emit playerChanged(m_player);
+    disconnect(this, SLOT(backendChanged_cb()));
+
+    if(p){
+        connect(p, &Player::connectionStateChanged, this, &MathQuizClient::connectionStateChanged_cb);
+    }
+
 }
 

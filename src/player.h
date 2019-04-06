@@ -2,42 +2,52 @@
 #define PLAYER_H
 
 #include <QObject>
-#include <QString>
 
+#include <QDebug>
+
+#include "playerinformation.h"
 #include "playerbackend.h"
+#include "encoderdecoder.h"
+#include "message.h"
 
 class Player : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(int score READ score NOTIFY scoreChanged)
-    Q_PROPERTY(bool alive READ alive NOTIFY aliveChanged)
+    Q_PROPERTY(PlayerInformation * infos READ infos WRITE setInfos NOTIFY infosChanged)
+    Q_PROPERTY(PlayerBackend * backend READ backend WRITE setBackend NOTIFY backendChanged)
+    Q_PROPERTY(EncoderDecoder * encoderDecoder READ encoderDecoder WRITE setEncoderDecoder NOTIFY encoderDecoderChanged)
 
 public:
     explicit Player(QObject *parent = nullptr);
-    Player(PlayerBackend * backend, QObject *parent = nullptr);
+    explicit Player(PlayerInformation * infos, PlayerBackend * backend = nullptr, EncoderDecoder * encoderDecoder = nullptr, QObject *parent = nullptr);
 
-    QString name() const { return m_name; }
-    int score() const { return m_score; }
-    bool alive() const { return m_alive; }
+    PlayerInformation * infos() const { return m_infos; }
+    PlayerBackend * backend() const { return m_backend; }
+    EncoderDecoder * encoderDecoder() const { return m_encoderDecoder; }
+
+    bool sendMessage(Message * m);
 
 signals:
-    void nameChanged(QString name);
-    void scoreChanged(int score);
-    void aliveChanged(bool alive);
+    void infosChanged(PlayerInformation * infos);
+    void backendChanged(PlayerBackend * backend);
+    void encoderDecoderChanged(EncoderDecoder * encoderDecoder);
+    void connectionStateChanged(PlayerBackend::ConnectionState state);
 
 public slots:
-    void setName(QString name);
-    void setScore(int score);
-    void setAlive(bool alive);
+    void setInfos(PlayerInformation * infos);
+    void setBackend(PlayerBackend * backend);
+    void setEncoderDecoder(EncoderDecoder * encoderDecoder);
+
+private slots:
+    void backendChanged_cb(PlayerBackend * backend);
+    void encodedMessageReceived(QByteArray message);
 
 private:
-    QString m_name;
-    int m_score;
-    bool m_alive;
-
+    PlayerInformation * m_infos;
     PlayerBackend * m_backend;
+    EncoderDecoder * m_encoderDecoder;
 
+    QString _className = "Player";
 };
 
 #endif // PLAYER_H

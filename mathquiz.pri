@@ -20,14 +20,16 @@ SOURCES += \
     $$PWD/src/game.cpp \
     $$PWD/src/connectionlistener.cpp \
     $$PWD/src/tcpconnectionlistener.cpp \
-    $$PWD/src/player.cpp \
     $$PWD/src/playerbackend.cpp \
     $$PWD/src/playertcpbackend.cpp \
     $$PWD/src/mathquiz.cpp \
     $$PWD/src/mathquizserver.cpp \
     $$PWD/src/mathquizclient.cpp \
     $$PWD/src/jsonencoderdecoder.cpp \
-    $$PWD/src/encoderdecoder.cpp
+    $$PWD/src/encoderdecoder.cpp \
+    $$PWD/src/playerinformation.cpp \
+    $$PWD/src/player.cpp \
+    $$PWD/src/message.cpp
 
 RESOURCES += \
     $$PWD/mathquiz.qrc
@@ -45,12 +47,14 @@ HEADERS += \
     $$PWD/src/game.h \
     $$PWD/src/connectionlistener.h \
     $$PWD/src/tcpconnectionlistener.h \
-    $$PWD/src/player.h \
     $$PWD/src/playerbackend.h \
     $$PWD/src/playertcpbackend.h \
     $$PWD/src/mathquiz.h \
     $$PWD/src/mathquizserver.h \
     $$PWD/src/mathquizclient.h \
     $$PWD/src/jsonencoderdecoder.h \
-    $$PWD/src/encoderdecoder.h
+    $$PWD/src/encoderdecoder.h \
+    $$PWD/src/playerinformation.h \
+    $$PWD/src/player.h \
+    $$PWD/src/message.h
 

@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QAbstractSocket>
+#include <QMetaMethod>
 
 #include "playerbackend.h"
 
@@ -15,13 +16,16 @@ class PlayerTCPBackend : public PlayerBackend
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
 
 public:
-    PlayerTCPBackend();
-    PlayerTCPBackend(QTcpSocket * s);
+    PlayerTCPBackend(QObject * parent = nullptr);
+    PlayerTCPBackend(QTcpSocket * s, QObject * parent = nullptr);
 
     QString ip() const { return m_ip; }
     int port() const { return m_port; }
 
     bool sendMessage(QByteArray message);
+
+    bool messagesAvailable();
+    QList<QByteArray> messages();
 
 public slots:
     void setIp(QString ip);
@@ -40,6 +44,9 @@ private:
     QTcpSocket * m_socket;
     QString m_ip;
     int m_port;
+    QList<QByteArray> m_messagesStored;
+
+    QString _classname = "PlayerTCPBackend";
 };
 
 #endif // PLAYERTCPBACKEND_H

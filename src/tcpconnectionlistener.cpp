@@ -43,7 +43,9 @@ void TcpConnectionListener::newTCPConnectionCallback()
         return;
     }
 
-    Player * p = new Player(new PlayerTCPBackend(s));
+    Player * p = new Player();
+    p->setBackend(new PlayerTCPBackend(s));
+    p->setEncoderDecoder(new JSONEncoderDecoder(p));
 
     emit newConnection(p);
 }

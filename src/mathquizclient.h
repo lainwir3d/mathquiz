@@ -5,41 +5,34 @@
 
 #include <QObject>
 
-#include "playerbackend.h"
-#include "encoderdecoder.h"
-#include "jsonencoderdecoder.h"
+#include "message.h"
+
 #include "player.h"
+#include "playerbackend.h"
 
 class MathQuizClient : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(PlayerBackend * backend READ backend WRITE setBackend NOTIFY backendChanged)
     Q_PROPERTY(Player * player READ player WRITE setPlayer NOTIFY playerChanged)
 public:
     explicit MathQuizClient(QObject *parent = nullptr);
 
-    PlayerBackend * backend() const { return m_backend; }
-
     Player * player() const { return m_player; }
 
 signals:
-    void backendChanged(PlayerBackend * backend);
-
     void playerChanged(Player * player);
 
 public slots:
-    void setBackend(PlayerBackend * backend);
     void setPlayer(Player * player);
 
 private slots:
-    void backendChanged_cb(PlayerBackend * backend);
-    void backendStateChanged_cb(PlayerBackend::ConnectionState state);
-
+    void connectionStateChanged_cb(PlayerBackend::ConnectionState state);
+    void playerChanged_cb(Player * p);
 
 private:
-    PlayerBackend * m_backend;
-    EncoderDecoder * m_encoderdecoder;
     Player * m_player;
+
+    QString _classname = "MathQuizClient";
 };
 
 #endif // MATHQUIZCLIENT_H

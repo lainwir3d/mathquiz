@@ -16,17 +16,21 @@ Window {
     property string _defaultIP: "127.0.0.1"
 
     MathQuizClient {
-        backend: PlayerTCPBackend {
-            id: tcpBackend
-
-            ip: ipField.text
-            port: 42000
-        }
-
         player: Player {
-            id: player
+            infos: PlayerInformation {
+                id: player
 
-            name: playerNameField.text
+                name: playerNameField.text
+            }
+            backend: PlayerTCPBackend {
+                id: tcpBackend
+
+                ip: ipField.text
+                port: 42000
+            }
+            encoderDecoder: JSONEncoderDecoder {
+
+            }
         }
     }
 

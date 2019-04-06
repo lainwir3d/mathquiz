@@ -5,38 +5,35 @@ JSONEncoderDecoder::JSONEncoderDecoder(QObject *parent) : EncoderDecoder(parent)
 
 }
 
-QByteArray JSONEncoderDecoder::encode(const Player *p)
+QByteArray JSONEncoderDecoder::encode(const Message * m)
 {
     QJsonDocument doc;
 
     QJsonArray messages;
 
-    QJsonObject obj = _encode(p);
+    QMap<QString, QVariant> data = m->payload();
 
-    messages.append(obj);
+    QJsonObject payload;
+
+    QMapIterator<QString, QVariant> i(data);
+    while (i.hasNext()) {
+        i.next();
+        payload.insert(i.key(), QJsonValue::fromVariant(i.value()));
+    }
+
+    QJsonObject jsonMessage;
+    jsonMessage["payload"] = payload;
+    jsonMessage["type"] = Message::typeMap.value(m->type());
+    jsonMessage["timestamp"] = m->timestamp();
+
+    messages.append(jsonMessage);
 
     doc.setArray(messages);
 
     return doc.toJson();
 }
 
-Player JSONEncoderDecoder::decode(QByteArray o)
-{
-
-}
-
-QJsonObject JSONEncoderDecoder::_encode(const Player *p)
-{
-    QJsonObject obj;
-
-    obj["name"] = p->name();
-    obj["score"] = p->score();
-    obj["alive"] = p->alive();
-
-    return obj;
-}
-
-Player JSONEncoderDecoder::_decode(QJsonObject o)
+Message * JSONEncoderDecoder::decode(QByteArray o)
 {
 
 }

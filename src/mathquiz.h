@@ -9,7 +9,11 @@
 #include "tcpconnectionlistener.h"
 #include "mathquizserver.h"
 #include "mathquizclient.h"
+#include "playerinformation.h"
 #include "player.h"
+
+#include "encoderdecoder.h"
+#include "jsonencoderdecoder.h"
 
 class MathQuiz : public QObject
 {

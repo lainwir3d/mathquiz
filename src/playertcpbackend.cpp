@@ -1,10 +1,10 @@
 #include "playertcpbackend.h"
 
-PlayerTCPBackend::PlayerTCPBackend(): PlayerTCPBackend(new QTcpSocket())
+PlayerTCPBackend::PlayerTCPBackend(QObject * parent): PlayerTCPBackend(new QTcpSocket(), parent)
 {
 }
 
-PlayerTCPBackend::PlayerTCPBackend(QTcpSocket * s)
+PlayerTCPBackend::PlayerTCPBackend(QTcpSocket * s, QObject * parent): PlayerBackend(parent)
 {
     m_socket = s;
 
@@ -49,10 +49,13 @@ void PlayerTCPBackend::connectToServer()
 void PlayerTCPBackend::socketStateChanged_cb(QAbstractSocket::SocketState socketState)
 {
     if(socketState == QAbstractSocket::ConnectedState){
+        qDebug() << QString("%1::%2 - ConnectedState").arg(_classname).arg(__func__);
         m_state = PlayerBackend::ConnectedState;
     }else if(socketState == QAbstractSocket::ConnectingState){
+        qDebug() << QString("%1::%2 - ConnectingState").arg(_classname).arg(__func__);
         m_state = PlayerBackend::ConnectingState;
     }else if(socketState == QAbstractSocket::UnconnectedState){
+        qDebug() << QString("%1::%2 - UnconnectedState").arg(_classname).arg(__func__);
         m_state = PlayerBackend::UnconnectedState;
     }
 
@@ -62,8 +65,17 @@ void PlayerTCPBackend::socketStateChanged_cb(QAbstractSocket::SocketState socket
 void PlayerTCPBackend::readyRead_cb()
 {
     qDebug() << __func__ << "- readyRead!!!";
-    QString message = QString::fromUtf8(m_socket->readAll());
-    qDebug() << QString("Message received: \n %1").arg(message);
+    QByteArray message_ar = m_socket->readAll();
+    QString message = QString::fromUtf8(message_ar);
+    qDebug() << QString("%1::%2 - Message received: \n %3").arg(_classname).arg(__func__).arg(message);
+
+    static const QMetaMethod messageReceivedSignal = QMetaMethod::fromSignal(&PlayerTCPBackend::messageReceived);
+    if(!this->isSignalConnected(messageReceivedSignal)){
+        qDebug() << QString("%1::%2 - Storing message for later use.").arg(_classname).arg(__func__).arg(message);
+        m_messagesStored.append(message_ar);
+    }
+
+    emit messageReceived(message_ar);
 }
 
 bool PlayerTCPBackend::sendMessage(QByteArray message)
@@ -79,6 +91,22 @@ bool PlayerTCPBackend::sendMessage(QByteArray message)
     }
 
     qDebug() << __func__ << "Sending message!";
-    m_socket->write(message);
+    int nbytes = m_socket->write(message);
+
+    return (nbytes == message.size());
+}
+
+bool PlayerTCPBackend::messagesAvailable()
+{
+    return !(m_messagesStored.isEmpty());
+}
+
+QList<QByteArray> PlayerTCPBackend::messages()
+{
+    QList<QByteArray> m = m_messagesStored;
+
+    m_messagesStored.clear();
+
+    return m;
 }
 

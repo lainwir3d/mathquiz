@@ -8,9 +8,11 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
-#include "player.h"
+#include "playerinformation.h"
 #include "question.h"
 #include "answer.h"
+
+#include "message.h"
 
 #include "encoderdecoder.h"
 
@@ -20,16 +22,14 @@ class JSONEncoderDecoder : public EncoderDecoder
 public:
     explicit JSONEncoderDecoder(QObject *parent = nullptr);
 
-    QByteArray encode(const Player * p);
-    Player decode(QByteArray o);
+    QByteArray encode(const Message * m);
+    Message * decode(QByteArray o);
 
 signals:
 
 public slots:
 
 private:
-    QJsonObject _encode(const Player * p);
-    Player _decode(QJsonObject o);
 
 };
 
