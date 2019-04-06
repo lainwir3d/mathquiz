@@ -30,7 +30,22 @@ void MathQuizServer::newPlayerConnectionCallback(Player *p)
 {
     qDebug() << QString("%1::%2").arg(metaObject()->className()).arg(__func__) << "- New connection from player";
 
+    p->infos()->setAlive(true);
+    p->infos()->setScore(0);
 
+    m_players.append(p);
+
+    connect(p, &Player::playerInformationReceived, [this, p](PlayerInformation * infos){ this->playerInformationReceived(p, infos); });
+}
+
+void MathQuizServer::playerInformationReceived(Player *p, PlayerInformation *info)
+{
+    qDebug() << QString("%1::%2 - Received player name: %3").arg(_classname).arg(__func__).arg(info->name());
+
+    // We only take the name from the object.
+    p->infos()->setName(info->name());
+
+    info->deleteLater();
 }
 
 void MathQuizServer::appendListener(QQmlListProperty<ConnectionListener> *list, ConnectionListener *p)

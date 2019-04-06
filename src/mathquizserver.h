@@ -37,17 +37,21 @@ public slots:
 
 private slots:
     void newPlayerConnectionCallback(Player * p);
+    void playerInformationReceived(Player * p, PlayerInformation * info);
 
 private:
-    QList<ConnectionListener *> m_listeners;
+    QList<Player *> m_players;
 
     /*
      * Static listener accessor
      */
+    QList<ConnectionListener *> m_listeners;
     static void appendListener(QQmlListProperty<ConnectionListener>*, ConnectionListener*);
     static int listenerCount(QQmlListProperty<ConnectionListener>*);
     static ConnectionListener* listener(QQmlListProperty<ConnectionListener>*, int);
     static void clearListener(QQmlListProperty<ConnectionListener>*);
+
+    QString _classname = "MathQuizServer";
 };
 
 #endif // MATHQUIZSERVER_H
