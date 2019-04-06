@@ -23,3 +23,20 @@ Message * Message::newMessage(PlayerInformation *i)
     Message * m = new Message(Message::PlayerInformationMessage, map);
     return m;
 }
+
+PlayerInformation * Message::toPlayerInformation(Message *m)
+{
+    if(!m) return nullptr;
+
+    if(!m->type() == Message::PlayerInformationMessage) return nullptr;
+
+
+    QMap<QString, QVariant> data = m->payload();
+
+    PlayerInformation * i = new PlayerInformation();
+    i->setName(data.value("name", "Invalid").toString());
+    i->setScore(data.value("score", 0).toInt());
+    i->setAlive(data.value("alive", true).toBool());
+
+    return i;
+}

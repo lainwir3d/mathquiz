@@ -29,6 +29,7 @@ public:
 
 
     static Message * newMessage(PlayerInformation * i);
+    static PlayerInformation * toPlayerInformation(Message * m);
 
 signals:
 
