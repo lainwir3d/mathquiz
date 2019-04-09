@@ -1,0 +1,25 @@
+{
+    _objectType: "quiz",
+    author: "Eric Fekete",
+    version: "1.0",
+    id: "MonSuperQuiz",
+    difficulty: "16",
+    questions: [
+        {
+            base: "BaseDeQuestionsAEric",
+            baseVersion: "0.9",
+            ids: [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            base: "BaseDeQuestionsARichard",
+            baseVersion: "42.0",
+            ids: [
+                1
+            ]
+        }
+    ]
+}

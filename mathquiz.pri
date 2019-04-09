@@ -60,3 +60,8 @@ HEADERS += \
     $$PWD/src/message.h \
     $$PWD/src/playerlistmodel.h
 
+EXTRA_BINDIRS += $$PWD/share
+
+for(DIR,EXTRA_BINDIRS){
+        QMAKE_POST_LINK += $$quote(cp -rf $${DIR} $${OUT_PWD}$$escape_expand(\n\t))
+}
