@@ -7,9 +7,9 @@ QuestionBase::QuestionBase(QObject *parent) : QObject(parent)
 
 }
 
-QMap<QString, QuestionBase *> * QuestionBase::parseStandardFolders()
+bool QuestionBase::parseStandardFolders(QMap<QString, QuestionBase *> **bases)
 {
-    QMap<QString, QuestionBase *> * bases = new QMap<QString, QuestionBase *>();
+    QMap<QString, QuestionBase *> * _bases = new QMap<QString, QuestionBase *>();
 
     QDir appdir = QCoreApplication::applicationDirPath() + "/share/questions/";
     QStringList filelist = appdir.entryList();
@@ -24,7 +24,7 @@ QMap<QString, QuestionBase *> * QuestionBase::parseStandardFolders()
                 QByteArray filecontent = f.readAll();
                 QuestionBase * b = decodeUTF8Json(&filecontent);
                 if(b){
-                    bases->insert(b->id(), b);
+                    _bases->insert(b->id(), b);
                 }else{
                     qDebug() << QString("%1::%2 - Could NOT decode file '%3'").arg(_classname).arg(__func__).arg(fname);
                 }
@@ -35,7 +35,9 @@ QMap<QString, QuestionBase *> * QuestionBase::parseStandardFolders()
         }
     }
 
-    return bases;
+    *bases = _bases;
+
+    return true;
 }
 
 QuestionBase *QuestionBase::decodeUTF8Json(QByteArray *barray)

@@ -49,6 +49,7 @@ private slots:
 
 private:
     PlayerListModel * m_playerListModel;
+    QMap<QString, QuestionBase *> * m_questionBases;
 
     /*
      * Static listener accessor

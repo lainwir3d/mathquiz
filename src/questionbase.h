@@ -28,7 +28,7 @@ public:
     Question * at(int i) { return m_questionList.at(i); }
 
     static QString _classname;
-    static QMap<QString, QuestionBase *> * parseStandardFolders();
+    static bool parseStandardFolders(QMap<QString, QuestionBase *> ** base);
     static QuestionBase * decodeUTF8Json(QByteArray * barray);
 
     QString id() const { return m_id; }

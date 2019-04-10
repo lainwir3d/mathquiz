@@ -4,7 +4,9 @@ MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 {
     m_playerListModel = new PlayerListModel(this);
 
-    QuestionBase::parseStandardFolders();
+
+    QuestionBase::parseStandardFolders(&m_questionBases);
+    m_questionBases;
 }
 
 void MathQuizServer::appendListener(ConnectionListener *l)
