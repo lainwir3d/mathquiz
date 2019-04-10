@@ -9,6 +9,7 @@
 #include "connectionlistener.h"
 #include "tcpconnectionlistener.h"
 #include "playerlistmodel.h"
+#include "questionbase.h"
 
 #include <QDebug>
 

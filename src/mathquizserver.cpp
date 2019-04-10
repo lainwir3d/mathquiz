@@ -3,6 +3,8 @@
 MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 {
     m_playerListModel = new PlayerListModel(this);
+
+    QuestionBase::parseStandardFolders();
 }
 
 void MathQuizServer::appendListener(ConnectionListener *l)

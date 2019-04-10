@@ -1,242 +1,242 @@
 {
-    _objectType: "questionBase", 
-    author: "Eric Fekete",
-    version: "0.9",
-    id: "BaseDeQuestionsAEric",
-    questions: [
+    "_objectType": "questionBase", 
+    "author": "Eric Fekete",
+    "version": "0.9",
+    "id": "BaseDeQuestionsAEric",
+    "questions": [
         {
-            _objectType: "question",
-            id: 1,
-            group: "arithmetic simple",  
-            question: "Calculer",
-            formula: "7+9",
-            timeLimit_ms: 7000,
-            difficulty: 0,
-            answers: [
+            "_objectType": "question",
+            "id": "1",
+            "group": "arithmetic simple",  
+            "question": "Calculer",
+            "formula": "7+9",
+            "timeLimit_ms": 7000,
+            "difficulty": 0,
+            "answers": [
                 {
-                    _objectType: "answer",
-                    formula: "16"
+                    "_objectType": "answer",
+                    "formula": "16"
                 }
 		      ]
         },
         {
-            id: 2,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "23+38",
-            timeLimit_ms: 7000,
-            difficulty: 1,
-            answers: [
+            "id": "2",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "23+38",
+            "timeLimit_ms": 7000,
+            "difficulty": 1,
+            "answers": [
                 {
-                    formula: "61"
+                    "formula": "61"
                 }
             ]
         },
         {
-            id: 3,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "-106+38",
-            timeLimit_ms: 7000,
-            difficulty: 3,
-            answers: [
+            "id": "3",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "-106+38",
+            "timeLimit_ms": 7000,
+            "difficulty": 3,
+            "answers": [
                 {
-                    formula: "68"
+                    "formula": "68"
                 }
             ]
         },
         {
-            id: 4,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "-16+22",
-            timeLimit_ms: 7000,
-            difficulty: 2,
-            answers: [
+            "id": "4",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "-16+22",
+            "timeLimit_ms": 7000,
+            "difficulty": 2,
+            "answers": [
                 {
-                    formula: "6"
+                    "formula": "6"
                 }
             ]
         },
         {
-            id: 4,
-            group: "arithmetic simple",
-            question: "Résoudre",
-            formula: "23-x=37",
-            timeLimit_ms: 10000,
-            difficulty: 4,
-            answers: [
+            "id": "5",
+            "group": "arithmetic simple",
+            "question": "Résoudre",
+            "formula": "23-x=37",
+            "timeLimit_ms": 10000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "-14"
+                    "formula": "-14"
                 }
             ]
         },
         {
-            id: 5,
-            group: "arithmetic simple",
-            question: "Résoudre",
-            formula: "2x=84",
-            timeLimit_ms: 7000,
-            difficulty: 3,
-            answers: [
+            "id": "6",
+            "group": "arithmetic simple",
+            "question": "Résoudre",
+            "formula": "2x=84",
+            "timeLimit_ms": 7000,
+            "difficulty": 3,
+            "answers": [
                 {
-                    formula: "42"
+                    "formula": "42"
                 }
             ]
         },
         {
-            id: 6,
-            group: "arithmetic simple",
-            question: "Résoudre",
-            formula: "x/3=17",
-            timeLimit_ms: 7000,
-            difficulty: 3,
-            answers: [
+            "id": "7",
+            "group": "arithmetic simple",
+            "question": "Résoudre",
+            "formula": "x/3=17",
+            "timeLimit_ms": 7000,
+            "difficulty": 3,
+            "answers": [
                 {
-                    formula: "51"
+                    "formula": "51"
                 }
             ]
         },
         {
-            id: 7,
-            group: "arithmetic simple",
-            question: "Résoudre",
-            formula: "7x+3=38",
-            timeLimit_ms: 10000,
-            difficulty: 4,
-            answers: [
+            "id": "8",
+            "group": "arithmetic simple",
+            "question": "Résoudre",
+            "formula": "7x+3=38",
+            "timeLimit_ms": 10000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "5"
+                    "formula": "5"
                 }
             ]
         },
         {
-            id: 8,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "11*12",
-            timeLimit_ms: 7000,
-            difficulty: 4,
-            answers: [
+            "id": "9",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "11*12",
+            "timeLimit_ms": 7000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "132"
+                    "formula": "132"
                 }
             ]
         },
         {
-            id: 9,
-            group: "arithmetic simple",
-            question: "Quel est le nombre suivant ?",
-            formula: "1,3,9,27,81,...",
-            timeLimit_ms: 10000,
-            difficulty: 4,
-            answers: [
+            "id": "10",
+            "group": "arithmetic simple",
+            "question": "Quel est le nombre suivant ?",
+            "formula": "1,3,9,27,81,...",
+            "timeLimit_ms": 10000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "243"
+                    "formula": "243"
                 }
             ]
         },
         {
-            id: 10,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "17(5-11)+1",
-            timeLimit_ms: 10000,
-            difficulty: 5,
-            answers: [
+            "id": "11",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "17(5-11)+1",
+            "timeLimit_ms": 10000,
+            "difficulty": 5,
+            "answers": [
                 {
-                    formula: "-101"
+                    "formula": "-101"
                 }
             ]
         },
         {
-            id: 11,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "1+2+3+4+5",
-            timeLimit_ms: 7000,
-            difficulty: 1,
-            answers: [
+            "id": "12",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "1+2+3+4+5",
+            "timeLimit_ms": 7000,
+            "difficulty": 1,
+            "answers": [
                 {
-                    formula: "15"
+                    "formula": "15"
                 }
             ]
         },
         {
-            id: 12,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "1-1+2-2+3+3",
-            timeLimit_ms: 7000,
-            difficulty: 1,
-            answers: [
+            "id": "13",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "1-1+2-2+3+3",
+            "timeLimit_ms": 7000,
+            "difficulty": 1,
+            "answers": [
                 {
-                    formula: "6"
+                    "formula": "6"
                 }
             ]
         },
         {
-            id: 13,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "1*2*3*4*5",
-            timeLimit_ms: 10000,
-            difficulty: 4,
-            answers: [
+            "id": "14",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "1*2*3*4*5",
+            "timeLimit_ms": 10000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "120"
+                    "formula": "120"
                 }
             ]
         },
         {
-            id: 14,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "120/4",
-            timeLimit_ms: 7000,
-            difficulty: 2,
-            answers: [
+            "id": "15",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "120/4",
+            "timeLimit_ms": 7000,
+            "difficulty": 2,
+            "answers": [
                 {
-                    formula: "30"
+                    "formula": "30"
                 }
             ]
         },
         {
-            id: 15,
-            group: "arithmetic simple",
-            question: "Calculer",
-            formula: "256/32",
-            timeLimit_ms: 10000,
-            difficulty: 5,
-            answers: [
+            "id": "16",
+            "group": "arithmetic simple",
+            "question": "Calculer",
+            "formula": "256/32",
+            "timeLimit_ms": 10000,
+            "difficulty": 5,
+            "answers": [
                 {
-                    formula: "8"
+                    "formula": "8"
                 }
             ]
         },
         {
-            id: 16,
-            group: "Culture générale",
-            question: "Quelle est la 5ème décimale de Pi ?",
-            formula: "",
-            timeLimit_ms: 10000,
-            difficulty: 4,
-            answers: [
+            "id": "17",
+            "group": "Culture générale",
+            "question": "Quelle est la 5ème décimale de Pi ?",
+            "formula": "",
+            "timeLimit_ms": 10000,
+            "difficulty": 4,
+            "answers": [
                 {
-                    formula: "9"
+                    "formula": "9"
                 }
             ]
         },
         {
-            id: 17,
-            group: "Culture générale",
-            question: "Que vaut la partie entière de racine de 2",
-            formula: "",
-            timeLimit_ms: 7000,
-            difficulty: 2,
-            answers: [
+            "id": "18",
+            "group": "Culture générale",
+            "question": "Que vaut la partie entière de racine de 2",
+            "formula": "",
+            "timeLimit_ms": 7000,
+            "difficulty": 2,
+            "answers": [
                 {
-                    formula: "1"
+                    "formula": "1"
                 }
             ]
         }
