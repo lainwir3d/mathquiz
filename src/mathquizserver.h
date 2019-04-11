@@ -8,8 +8,12 @@
 
 #include "connectionlistener.h"
 #include "tcpconnectionlistener.h"
+
 #include "playerlistmodel.h"
 #include "questionbase.h"
+
+#include "quiz.h"
+#include "quizlistmodel.h"
 
 #include <QDebug>
 
@@ -18,6 +22,8 @@ class MathQuizServer : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<ConnectionListener> listeners READ listeners)
     Q_PROPERTY(QAbstractItemModel * playerModel READ playerModel NOTIFY playerModelChanged)
+    Q_PROPERTY(QAbstractItemModel * quizModel READ quizModel NOTIFY quizModelChanged)
+
 public:
     explicit MathQuizServer(QObject *parent = nullptr);
 
@@ -37,9 +43,16 @@ public:
 
     QAbstractItemModel * playerModel() const { return m_playerListModel; }
 
+    QAbstractItemModel * quizModel() const
+    {
+        return m_quizModel;
+    }
+
 signals:
 
     void playerModelChanged(PlayerListModel * playerModel);
+
+    void quizModelChanged(QAbstractItemModel * quizModel);
 
 public slots:
 
@@ -50,6 +63,7 @@ private slots:
 private:
     PlayerListModel * m_playerListModel;
     QMap<QString, QuestionBase *> * m_questionBases;
+    QMap<QString, Quiz *> * m_quizs;
 
     /*
      * Static listener accessor
@@ -61,6 +75,7 @@ private:
     static void clearListener(QQmlListProperty<ConnectionListener>*);
 
     QString _classname = "MathQuizServer";
+    QAbstractItemModel * m_quizModel;
 };
 
 #endif // MATHQUIZSERVER_H
