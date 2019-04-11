@@ -28,9 +28,12 @@ public:
     int timeLimit_ms() const { return m_timeLimit_ms; }
     int difficulty() const { return m_difficulty; }
 
+
+    QList<Answer *> answers() const { return QList<Answer *>(m_answers); }
     void appendAnswer(Answer * answer);
     bool checkAnswer(Answer *answer);
 
+    static Question * deepcopy(Question * questionSrc);
 
 signals:
     void idChanged(QString id);

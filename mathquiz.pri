@@ -31,7 +31,9 @@ SOURCES += \
     $$PWD/src/player.cpp \
     $$PWD/src/message.cpp \
     $$PWD/src/playerlistmodel.cpp \
-    $$PWD/src/questionbase.cpp
+    $$PWD/src/questionbase.cpp \
+    $$PWD/src/quiz.cpp \
+    $$PWD/src/quizlistmodel.cpp
 
 RESOURCES += \
     $$PWD/mathquiz.qrc
@@ -60,7 +62,9 @@ HEADERS += \
     $$PWD/src/player.h \
     $$PWD/src/message.h \
     $$PWD/src/playerlistmodel.h \
-    $$PWD/src/questionbase.h
+    $$PWD/src/questionbase.h \
+    $$PWD/src/quiz.h \
+    $$PWD/src/quizlistmodel.h
 
 EXTRA_BINDIRS += $$PWD/share
 

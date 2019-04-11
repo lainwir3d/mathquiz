@@ -43,6 +43,29 @@ bool Question::checkAnswer(Answer *answer)
     return ok;
 }
 
+Question *Question::deepcopy(Question *questionSrc)
+{
+    Question * dst = new Question();
+
+    dst->setId(questionSrc->id());
+    dst->setGroup(questionSrc->group());
+    dst->setFormula(questionSrc->formula());
+    dst->setImageUri(questionSrc->imageUri());
+    dst->setQuestion(questionSrc->question());
+    dst->setDifficulty(questionSrc->difficulty());
+    dst->setTimeLimit_ms(questionSrc->timeLimit_ms());
+
+    QList<Answer *> answerSrc = dst->answers();
+
+    for(int i=0; i < answerSrc.size() ; i++){
+        Answer * aDst = new Answer();
+        aDst->setFormula(answerSrc.at(i)->formula());
+        dst->appendAnswer(aDst);
+    }
+
+    return dst;
+}
+
 void Question::setId(QString id)
 {
     if(m_readOnly) return;

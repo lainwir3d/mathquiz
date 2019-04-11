@@ -27,6 +27,7 @@ public:
     int length() { return m_questionList.length(); }
     int size() { return m_questionList.size(); }
     Question * at(int i) { return m_questionList.at(i); }
+    Question * question(QString id);
 
     static QString _classname;
     static bool parseStandardFolders(QMap<QString, QuestionBase *> ** base);

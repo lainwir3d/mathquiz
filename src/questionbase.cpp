@@ -7,6 +7,15 @@ QuestionBase::QuestionBase(QObject *parent) : QObject(parent)
 
 }
 
+Question *QuestionBase::question(QString id)
+{
+    if(m_questionById.contains(id)){
+        return m_questionById.value(id);
+    }else{
+        return nullptr;
+    }
+}
+
 bool QuestionBase::parseStandardFolders(QMap<QString, QuestionBase *> **bases)
 {
     QMap<QString, QuestionBase *> * _bases = new QMap<QString, QuestionBase *>();
