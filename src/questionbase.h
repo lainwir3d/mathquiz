@@ -13,6 +13,7 @@
 #include <QJsonArray>
 
 #include "question.h"
+#include "questiongroup.h"
 
 class QuestionBase : public QObject
 {
@@ -34,7 +35,7 @@ public:
     QString id() const { return m_id; }
     QString author() const { return m_author; }
     QString version() const { return m_version; }
-    bool appendQuestion(Question * q);
+    bool appendQuestion(Question * q, QString group);
 
 signals:
     void idChanged(QString id);
@@ -47,7 +48,9 @@ public slots:
     void setVersion(QString version);
 
 private:
+    QMap<QString, Question *> m_questionById;
     QList<Question *> m_questionList;
+    QMap<QString, QuestionGroup *> m_questionListByGroup;
 
     QString m_id;
     QString m_author;

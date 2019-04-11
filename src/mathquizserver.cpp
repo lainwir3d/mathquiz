@@ -6,7 +6,6 @@ MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 
 
     QuestionBase::parseStandardFolders(&m_questionBases);
-    m_questionBases;
 }
 
 void MathQuizServer::appendListener(ConnectionListener *l)

@@ -71,12 +71,14 @@ QuestionBase *QuestionBase::decodeUTF8Json(QByteArray *barray)
                         QString formula = qObj.value("formula").toString();
                         QString question = qObj.value("question").toString();
                         QJsonArray answersArray = qObj.value("answers").toArray();
+                        QString group = qObj.value("group").toString();
 
                         if((!id.isEmpty()) && (difficulty != -1) && ( (!formula.isEmpty()) || (!question.isEmpty()) ) && (answersArray.size() > 0) ){
                             q->setDifficulty(difficulty);
                             q->setFormula(formula);
                             q->setId(id);
                             q->setQuestion(question);
+                            q->setGroup(group);
 
                             for(int j=0; j < answersArray.size() ; j++){
                                 QJsonObject aObj = answersArray.at(j).toObject();
@@ -100,7 +102,7 @@ QuestionBase *QuestionBase::decodeUTF8Json(QByteArray *barray)
                                 }
                             }
 
-                        base->appendQuestion(q);
+                        base->appendQuestion(q, group);
 
                         }else{
                             qDebug() << QString("%1::%2 - Could not read mandatory keys for Question at index %3: conversion error. Ignoring.").arg(_classname).arg(__func__).arg(i);
@@ -124,10 +126,24 @@ QuestionBase *QuestionBase::decodeUTF8Json(QByteArray *barray)
     return base;
 }
 
-bool QuestionBase::appendQuestion(Question *q)
+bool QuestionBase::appendQuestion(Question *q, QString group)
 {
     if(q){
         m_questionList.append(q);
+        m_questionById.insert(q->id(), q);
+
+
+        if(m_questionListByGroup.contains(q->group())){
+            QuestionGroup * g = m_questionListByGroup.value(q->group());
+            g->insertQuestion(q);
+        }else{
+            QuestionGroup * g = new QuestionGroup();
+            g->setName(q->group());
+            g->insertQuestion(q);
+
+            m_questionListByGroup.insert(g->name(), g);
+        }
+
         return true;
     }else{
         return false;
