@@ -112,3 +112,12 @@ void Question::setDifficulty(int difficulty)
     m_difficulty = difficulty;
     emit difficultyChanged(m_difficulty);
 }
+
+void Question::setGroup(QString group)
+{
+    if (m_group == group)
+        return;
+
+    m_group = group;
+    emit groupChanged(m_group);
+}

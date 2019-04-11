@@ -14,6 +14,7 @@ class Question : public QObject
     Q_PROPERTY(QString question READ question WRITE setQuestion NOTIFY questionChanged)
     Q_PROPERTY(QString imageUri READ imageUri WRITE setImageUri NOTIFY imageUriChanged)
     Q_PROPERTY(QString formula READ formula WRITE setFormula NOTIFY formulaChanged)
+    Q_PROPERTY(QString group READ group WRITE setGroup NOTIFY groupChanged)
     Q_PROPERTY(int timeLimit_ms READ timeLimit_ms WRITE setTimeLimit_ms NOTIFY timeLimit_msChanged)
     Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
 public:
@@ -23,11 +24,13 @@ public:
     QString question() const { return m_question; }
     QString imageUri() const { return m_imageUri; }
     QString formula() const { return m_formula; }
+    QString group() const { return m_group; }
     int timeLimit_ms() const { return m_timeLimit_ms; }
     int difficulty() const { return m_difficulty; }
 
     void appendAnswer(Answer * answer);
     bool checkAnswer(Answer *answer);
+
 
 signals:
     void idChanged(QString id);
@@ -38,6 +41,7 @@ signals:
     void timeLimit_msChanged(int timeLimit_ms);
 
     void difficultyChanged(int difficulty);
+    void groupChanged(QString group);
 
 public slots:
     void setQuestion(QString question);
@@ -50,6 +54,8 @@ public slots:
     void setTimeLimit_ms(int timeLimit_ms);
     void setDifficulty(int difficulty);
 
+    void setGroup(QString group);
+
 private:
     QString m_id;
     QString m_question;
@@ -61,6 +67,7 @@ private:
     int m_difficulty;
 
     QList<Answer *> m_answers;
+    QString m_group;
 };
 
 #endif // QUESTION_H
