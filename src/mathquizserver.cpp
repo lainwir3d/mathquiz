@@ -4,6 +4,9 @@ MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 {
     m_playerListModel = new PlayerListModel(this);
 
+    connect(m_playerListModel, &QAbstractItemModel::rowsInserted, this, &MathQuizServer::playerListChanged);
+    connect(m_playerListModel, &QAbstractItemModel::rowsRemoved, this, &MathQuizServer::playerListChanged);
+
     QuestionBase::parseStandardFolders(&m_questionBases);
 
     QMap<QString, Quiz *> * quizs;
@@ -38,6 +41,11 @@ ConnectionListener *MathQuizServer::listener(int idx)
 void MathQuizServer::clearListener()
 {
     m_listeners.clear();
+}
+
+void MathQuizServer::playerListChanged()
+{
+    emit nbPlayersConnectedChanged(m_playerListModel->rowCount());
 }
 
 void MathQuizServer::newPlayerConnectionCallback(Player *p)

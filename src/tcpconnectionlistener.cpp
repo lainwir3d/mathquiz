@@ -6,6 +6,7 @@ TcpConnectionListener::TcpConnectionListener()
 
     m_port = 42000;
     m_listen = false;
+    m_listeningDetails = "";
 
     connect(m_tcpServer, &QTcpServer::newConnection, this, &TcpConnectionListener::newTCPConnectionCallback);
 }
@@ -66,6 +67,18 @@ void TcpConnectionListener::setListen(bool listen)
 
     if(listen){
         if(!startListening()) return;
+        QList<QHostAddress> list = QNetworkInterface::allAddresses();
+        m_listeningDetails = "";
+        for(int nIter=0; nIter<list.count(); nIter++) {
+            if(!list[nIter].isLoopback()){
+                if(list[nIter].protocol() == QAbstractSocket::IPv4Protocol){
+                    QString ip = list[nIter].toString();
+                    if(m_listeningDetails.isEmpty()) m_listeningDetails = QString("%1").arg(ip);
+                    else m_listeningDetails.append(QString(" / %1").arg(ip));
+                }
+            }
+        }
+        emit listeningDetailsChanged(m_listeningDetails);
     }else{
         if(!stopListening()) return;
     }

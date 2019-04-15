@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpServer>
+#include <QNetworkInterface>
 
 #include "connectionlistener.h"
 #include "playertcpbackend.h"
@@ -13,7 +14,6 @@ class TcpConnectionListener : public ConnectionListener
 {
     Q_OBJECT
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
-    Q_PROPERTY(bool listen READ listen WRITE setListen NOTIFY listenChanged)
 public:
     TcpConnectionListener();
 
@@ -26,13 +26,14 @@ public:
 
     bool listen() const { return m_listen; }
 
+    QString listeningDetails() const { return m_listeningDetails; }
+
 public slots:
     void setPort(int port);
     void setListen(bool listen);
 
 signals:
     void portChanged(int port);
-    void listenChanged(bool listen);
 
 private slots:
     void newTCPConnectionCallback();
@@ -42,6 +43,7 @@ private:
 
     int m_port;
     bool m_listen;
+    QString m_listeningDetails;
 };
 
 #endif // TCPCONNECTIONLISTENER_H

@@ -21,6 +21,17 @@ ApplicationWindow {
         ]
     }
 
+    StackView {
+        id: stack
+
+        anchors.fill: parent
+
+        Component.onCompleted: {
+            stack.push([Qt.resolvedUrl("MathQuizServerOverview.qml"), {"server": server} ]);
+        }
+    }
+
+    /*
     ListView {
         anchors.fill: parent
 
@@ -31,5 +42,6 @@ ApplicationWindow {
         }
 
     }
+    */
 
 }

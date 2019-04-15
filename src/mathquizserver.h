@@ -24,6 +24,8 @@ class MathQuizServer : public QObject
     Q_PROPERTY(QAbstractItemModel * playerModel READ playerModel NOTIFY playerModelChanged)
     Q_PROPERTY(QAbstractItemModel * quizModel READ quizModel NOTIFY quizModelChanged)
 
+    Q_PROPERTY(int nbPlayersConnected READ nbPlayersConnected NOTIFY nbPlayersConnectedChanged)
+
 public:
     explicit MathQuizServer(QObject *parent = nullptr);
 
@@ -48,15 +50,20 @@ public:
         return m_quizModel;
     }
 
+    int nbPlayersConnected() const { return m_playerListModel->rowCount(); }
+
 signals:
 
     void playerModelChanged(PlayerListModel * playerModel);
 
     void quizModelChanged(QAbstractItemModel * quizModel);
 
+    void nbPlayersConnectedChanged(int nbPlayersConnected);
+
 public slots:
 
 private slots:
+    void playerListChanged();
     void newPlayerConnectionCallback(Player * p);
     void playerInformationReceived(Player * p, PlayerInformation * info);
 
