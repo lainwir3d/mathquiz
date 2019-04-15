@@ -4,9 +4,18 @@ MathQuizServer::MathQuizServer(QObject *parent) : QObject(parent)
 {
     m_playerListModel = new PlayerListModel(this);
 
-
     QuestionBase::parseStandardFolders(&m_questionBases);
-    Quiz::parseStandardFolders(&m_quizs, m_questionBases);
+
+    QMap<QString, Quiz *> * quizs;
+
+    bool ok = Quiz::parseStandardFolders(&quizs, m_questionBases);
+    if(ok){
+        m_quizModel = new QuizListModel(quizs, this);
+    }else{
+        quizs = nullptr;
+        m_quizModel = new QuizListModel(this);
+        qDebug() << QString("%1::%2").arg(metaObject()->className()).arg(__func__) << "- Could not parse quiz files";
+    }
 }
 
 void MathQuizServer::appendListener(ConnectionListener *l)

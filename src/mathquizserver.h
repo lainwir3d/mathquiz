@@ -63,7 +63,6 @@ private slots:
 private:
     PlayerListModel * m_playerListModel;
     QMap<QString, QuestionBase *> * m_questionBases;
-    QMap<QString, Quiz *> * m_quizs;
 
     /*
      * Static listener accessor
@@ -75,7 +74,7 @@ private:
     static void clearListener(QQmlListProperty<ConnectionListener>*);
 
     QString _classname = "MathQuizServer";
-    QAbstractItemModel * m_quizModel;
+    QuizListModel * m_quizModel;
 };
 
 #endif // MATHQUIZSERVER_H
