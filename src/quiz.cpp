@@ -57,8 +57,11 @@ Quiz *Quiz::decodeUTF8Json(QByteArray *barray, QMap<QString, QuestionBase *> * b
                 quiz->setId(obj.value("id").toString("ID inconnu"));
                 quiz->setVersion(obj.value("version").toString("Version inconnu"));
                 quiz->setAuthor(obj.value("author").toString("Auteur inconnu"));
+                quiz->setDifficulty(obj.value("difficulty").toInt(-1));
 
                 QJsonArray qArray = obj.value("questions").toArray();
+
+                int averageDifficulty = 0;
 
                 for(int i=0; i < qArray.size() ; i++){
                     QJsonObject qObj = qArray.at(i).toObject();
@@ -86,6 +89,7 @@ Quiz *Quiz::decodeUTF8Json(QByteArray *barray, QMap<QString, QuestionBase *> * b
                                             if(qSrc){
                                                 Question * qDst = Question::deepcopy(qSrc);
                                                 quiz->appendQuestion(qDst);
+                                                averageDifficulty += qDst->difficulty();
                                             }else {
                                                 qDebug() << QString("%1::%2 - Question reference id %3 not found in question base %4 version %5. Ignoring Question reference at index %6.").arg(_classname).arg(__func__).arg(qId).arg(baseName).arg(baseVersion).arg(j);
                                             }
@@ -107,6 +111,13 @@ Quiz *Quiz::decodeUTF8Json(QByteArray *barray, QMap<QString, QuestionBase *> * b
                     }else{
                         qDebug() << QString("%1::%2 - Question at index %3 is missing mandatory keys 'formula' OR 'question' / 'difficulty' / 'id' / 'answers'. Ignoring.").arg(_classname).arg(__func__).arg(i);
                     }
+                }
+
+                averageDifficulty = averageDifficulty / quiz->length();
+
+                if(quiz->difficulty() == -1){
+                    qDebug() << QString("%1::%2 - Quiz difficulty not set. Setting it as average of all question difficulty (%3).").arg(_classname).arg(__func__).arg(averageDifficulty);
+                    quiz->setDifficulty(averageDifficulty);
                 }
             }else{
                 qDebug() << QString("%1::%2 - Question base is missing mandatory keys 'id', 'version' and 'questions'.").arg(_classname).arg(__func__);
@@ -166,4 +177,13 @@ void Quiz::setVersion(QString version)
 
     m_version = version;
     emit versionChanged(m_version);
+}
+
+void Quiz::setDifficulty(int difficulty)
+{
+    if (m_difficulty == difficulty)
+        return;
+
+    m_difficulty = difficulty;
+    emit difficultyChanged(m_difficulty);
 }

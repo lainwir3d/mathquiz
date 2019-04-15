@@ -14,7 +14,8 @@ class Quiz : public QObject
     Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged)
     Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
-
+    Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
+    Q_PROPERTY(int questionNumbers READ questionNumbers NOTIFY questionNumbersChanged)
 public:
     explicit Quiz(QObject *parent = nullptr);
 
@@ -32,23 +33,29 @@ public:
 
     bool appendQuestion(Question * q);
 
+    int difficulty() const { return m_difficulty; }
+    int questionNumbers() const { return m_questionList.length(); }
+
 signals:
     void idChanged(QString id);
     void authorChanged(QString author);
     void versionChanged(QString version);
+    void difficultyChanged(int difficulty);
+    void questionNumbersChanged(int questionNumbers);
 
 public slots:
     void setId(QString id);
     void setAuthor(QString author);
     void setVersion(QString version);
+    void setDifficulty(int difficulty);
 
 private:
     QString m_id;
     QString m_author;
     QString m_version;
+    int m_difficulty;
 
     QList<Question *> m_questionList;
-
 };
 
 #endif // QUIZ_H
