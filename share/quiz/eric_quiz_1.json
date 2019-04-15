@@ -3,7 +3,7 @@
     "author": "Eric Fekete",
     "version": "1.0",
     "id": "MonSuperQuiz",
-    "difficulty": "16",
+    "difficulty": "3",
     "questions": [
         {
             "base": "BaseDeQuestionsAEric",
@@ -11,14 +11,18 @@
             "ids": [
                 "1",
                 "2",
-                "3"
+                "3",
+                "5",
+                "7"
             ]
         },
         {
-            "base": "BaseDeQuestionsARichard",
-            "baseVersion": "42.0",
+            "base": "BaseDeQuestionsAEric2",
+            "baseVersion": "0.1",
             "ids": [
-                "1"
+                "1",
+                "2",
+                "12"
             ]
         }
     ]
